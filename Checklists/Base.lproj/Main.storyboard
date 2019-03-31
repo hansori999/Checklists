@@ -44,7 +44,7 @@
                     <navigationItem key="navigationItem" title="Checklists" id="37l-Dk-H9D">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="UKs-kv-CKx">
                             <connections>
-                                <action selector="addItem:" destination="P69-Cd-DC1" id="hlo-jQ-5dB"/>
+                                <segue destination="lL9-2R-Cwb" kind="show" id="KCC-or-lfO"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -52,6 +52,46 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7g9-HU-dvg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1215" y="121.47887323943662"/>
+        </scene>
+        <!--Add Item-->
+        <scene sceneID="Wnl-rH-k5y">
+            <objects>
+                <tableViewController id="lL9-2R-Cwb" customClass="AddItemViewController" customModule="Checklists" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="83Z-Ge-ESy">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="wKy-AU-lwU">
+                                <rect key="frame" x="0.0" y="28" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wKy-AU-lwU" id="HrQ-sP-J35">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="lL9-2R-Cwb" id="wGE-P4-ue4"/>
+                            <outlet property="delegate" destination="lL9-2R-Cwb" id="WyF-qz-ixV"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Add Item" id="LlQ-OZ-kEt">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Crm-3a-bYb">
+                            <connections>
+                                <action selector="cancel" destination="lL9-2R-Cwb" id="iAK-Vl-30g"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="f3H-r1-ro2">
+                            <connections>
+                                <action selector="done" destination="lL9-2R-Cwb" id="W1m-hC-RBk"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="29I-DB-0on" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2196" y="121"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="jrs-5F-PUT">
