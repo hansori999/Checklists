@@ -44,6 +44,9 @@ FhbiiJo
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="lL9-2R-Cwb" kind="show" identifier="EditItem" trigger="accessoryAction" id="wOd-yv-ME7"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -148,4 +151,7 @@ FhbiiJo
             <point key="canvasLocation" x="217.5" y="121.47887323943662"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="wOd-yv-ME7"/>
+    </inferredMetricsTieBreakers>
 </document>
