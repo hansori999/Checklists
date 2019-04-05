@@ -15,6 +15,7 @@ class ChecklistViewController: UITableViewController, ItemDetailViewControllerDe
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        /*
         let item1 = ChecklistItem()
         item1.text = "Walk the dog"
         items.append(item1)
@@ -39,6 +40,9 @@ class ChecklistViewController: UITableViewController, ItemDetailViewControllerDe
         
         print("Documents folder is \(documentsDirectory())")
         print(" Data file is \(dataFilePath())")
+        */
+        /* Loading current file */
+        loadChecklistItems()
     }
 
     /* Saving the file */
@@ -49,6 +53,18 @@ class ChecklistViewController: UITableViewController, ItemDetailViewControllerDe
             try data.write(to: dataFilePath(), options: Data.WritingOptions.atomic)
         } catch {
             print("Error encoding item array: \(error.localizedDescription)")
+        }
+    }
+    /* Loading the file */
+    func loadChecklistItems() {
+        let path = dataFilePath()
+        if let data = try? Data(contentsOf: path) {
+            let decoder = PropertyListDecoder()
+            do {
+                items = try decoder.decode([ChecklistItem].self, from: data)
+            } catch {
+                print("Error decoding item array: \(error.localizedDescription)")
+            }
         }
     }
 
