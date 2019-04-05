@@ -36,8 +36,23 @@ class ChecklistViewController: UITableViewController, ItemDetailViewControllerDe
         let item5 = ChecklistItem()
         item5.text = "Eat ice cream"
         items.append(item5)
+        
+        print("Documents folder is \(documentsDirectory())")
+        print(" Data file is \(dataFilePath())")
     }
 
+    /* Saving the file */
+    func saveChecklistItems() {
+        let encoder = PropertyListEncoder()
+        do {
+            let data = try encoder.encode(items)
+            try data.write(to: dataFilePath(), options: Data.WritingOptions.atomic)
+        } catch {
+            print("Error encoding item array: \(error.localizedDescription)")
+        }
+    }
+
+    
     func configureCheckmark(for cell: UITableViewCell, with item: ChecklistItem) {
         
         let label = cell.viewWithTag(1001) as! UILabel
@@ -68,6 +83,17 @@ class ChecklistViewController: UITableViewController, ItemDetailViewControllerDe
 
     }
     
+    /* File I/O */
+    func documentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        return paths[0]
+    }
+    
+    func dataFilePath() -> URL {
+        return documentsDirectory().appendingPathComponent("Checklists.plist")
+    }
+
+    
     /* delete Row */
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle,
                             forRowAt indexPath: IndexPath) {
@@ -75,6 +101,8 @@ class ChecklistViewController: UITableViewController, ItemDetailViewControllerDe
         
         let indexPaths = [indexPath]
         tableView.deleteRows(at: indexPaths, with: .automatic)
+        /* Save data */
+        saveChecklistItems()
     }
 
     // MARK:- Table View Data Source
@@ -108,6 +136,8 @@ class ChecklistViewController: UITableViewController, ItemDetailViewControllerDe
         
         tableView.deselectRow(at: indexPath, animated: true)
         
+        /* Save data */
+        saveChecklistItems()
     }
 
     // MARK:- Add Item ViewController Delegates
@@ -125,6 +155,8 @@ class ChecklistViewController: UITableViewController, ItemDetailViewControllerDe
         tableView.insertRows(at: indexPaths, with: .automatic)
         
         navigationController?.popViewController(animated:true)
+        /* Save data */
+        saveChecklistItems()
     }
     
     func itemDetailViewController(_ controller: ItemDetailViewController, didFinishEditing item: ChecklistItem) {
@@ -135,6 +167,8 @@ class ChecklistViewController: UITableViewController, ItemDetailViewControllerDe
             }
         }
         navigationController?.popViewController(animated:true)
+        /* Save data */
+        saveChecklistItems()
     }
 
     
