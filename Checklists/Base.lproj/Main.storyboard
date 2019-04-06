@@ -64,7 +64,7 @@ FhbiiJo
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7g9-HU-dvg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1232" y="-548"/>
+            <point key="canvasLocation" x="1196" y="-543"/>
         </scene>
         <!--Add Item-->
         <scene sceneID="Wnl-rH-k5y">
@@ -130,7 +130,7 @@ FhbiiJo
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="29I-DB-0on" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2195.625" y="120.4225352112676"/>
+            <point key="canvasLocation" x="2111" y="-551"/>
         </scene>
         <!--All Lists-->
         <scene sceneID="ZFv-9d-238">
@@ -152,7 +152,7 @@ FhbiiJo
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SfJ-e9-QwM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="218" y="-560"/>
+            <point key="canvasLocation" x="321" y="-541"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="jrs-5F-PUT">
@@ -170,7 +170,7 @@ FhbiiJo
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KOH-tk-JST" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="152" y="184"/>
+            <point key="canvasLocation" x="-510" y="-542"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
