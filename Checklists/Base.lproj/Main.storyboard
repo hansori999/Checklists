@@ -164,7 +164,7 @@ FhbiiJo
         <!--Add Checklist-->
         <scene sceneID="Xva-Ds-zDK">
             <objects>
-                <tableViewController id="jvu-J7-tVX" customClass="ListDetailViewController" customModule="Checklists" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="ListDetailViewController" id="jvu-J7-tVX" customClass="ListDetailViewController" customModule="Checklists" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="Zk7-ef-K5k">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -247,7 +247,7 @@ FhbiiJo
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="8y0-Tl-Qdb"/>
+        <segue reference="c7R-Xi-qdB"/>
         <segue reference="KCC-or-lfO"/>
     </inferredMetricsTieBreakers>
 </document>
