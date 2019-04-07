@@ -30,8 +30,13 @@ class AllListsViewController: UITableViewController,ListDetailViewControllerDele
         
         list = Checklist(name: "To Do")
         lists.append(list)
-
         
+        /* Making list.items with lists */
+        for list in lists {
+            let item = ChecklistItem()
+            item.text = "Item for \(list.name)"
+            list.items.append(item)
+        }
     }
 
     // MARK: - Table view data source

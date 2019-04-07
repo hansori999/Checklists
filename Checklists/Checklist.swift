@@ -10,7 +10,8 @@ import UIKit
 
 class Checklist: NSObject {
     var name=""
-    
+    /* each Checklist object has Checklist item */
+    var items = [ChecklistItem]()
     init(name: String) {
         self.name = name
         super.init()
