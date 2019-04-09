@@ -10,7 +10,18 @@ import Foundation
 
 class DataModel {
     var lists = [Checklist]()
-  
+    
+    /* Computed property */
+    var indexOfSelectedChecklist: Int {
+        get {
+            return UserDefaults.standard.integer(forKey: "ChecklistIndex")
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: "ChecklistIndex")
+            UserDefaults.standard.synchronize() // For preventing error from causal saving
+        }
+    }
+
     init() {
         loadChecklists()
         registerDefaults()
