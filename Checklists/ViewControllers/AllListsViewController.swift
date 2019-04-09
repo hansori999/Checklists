@@ -17,9 +17,16 @@ class AllListsViewController: UITableViewController,ListDetailViewControllerDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
+        //tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
+        
         
     }
+    // View is going to appear 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+    }
+
     // View has just Appeared
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -48,12 +55,20 @@ class AllListsViewController: UITableViewController,ListDetailViewControllerDele
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
-
+        
+        // Get Cell
+        let cell: UITableViewCell!
+        if let c = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) {
+            cell = c
+        } else {
+            cell = UITableViewCell(style: .subtitle, reuseIdentifier: cellIdentifier)
+        }
+        
         // Configure the cell...
         let checklist = dataModel.lists[indexPath.row]
         cell.textLabel!.text = checklist.name
         cell.accessoryType = .detailDisclosureButton
+        cell.detailTextLabel!.text = "\(checklist.countUncheckedItems()) Remaining"
         return cell
     }
     
