@@ -24,11 +24,15 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
     
     @IBOutlet weak var shouldRemindSwitch: UISwitch!
     @IBOutlet weak var dueDateLabel: UILabel!
+    
+    @IBOutlet weak var datePickerCell: UITableViewCell!
+    @IBOutlet weak var datePicker: UIDatePicker!
 
     
     weak var delegate: ItemDetailViewControllerDelegate?
     var itemToEdit: ChecklistItem?
     var dueDate = Date()
+    var datePickerVisible = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,11 +84,29 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
         
     }
     
+    @IBAction func dateChanged(_ datePicker: UIDatePicker) {
+        dueDate = datePicker.date
+        updateDueDateLabel()
+    }
+    
+
+    func showDatePicker() {
+        datePickerVisible = true
+        let indexPathDatePicker = IndexPath(row: 2, section: 1)
+        tableView.insertRows(at: [indexPathDatePicker], with: .fade)
+        // Show set-up time
+        datePicker.setDate(dueDate, animated: false)
+    }
+
     // MARK:- Table View Delegates
     override func tableView(_ tableView: UITableView,
                             willSelectRowAt indexPath: IndexPath)
         -> IndexPath? {
-            return nil
+            if indexPath.section == 1 && indexPath.row == 1 {
+                return indexPath
+            } else {
+                return nil
+            }
     }
     
     // MARK:- Text Field Delegates
@@ -110,6 +132,47 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
         formatter.dateStyle = .medium
         formatter.timeStyle = .short
         dueDateLabel.text = formatter.string(from: dueDate)
+    }
+
+    // MARK:- Table View Delegates
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 1 && datePickerVisible {
+            return 3
+        } else {
+            return super.tableView(tableView, numberOfRowsInSection: section)
+        }
+    }
+
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.section == 1 && indexPath.row == 2 {
+            return datePickerCell
+        } else {
+            return super.tableView(tableView, cellForRowAt: indexPath)
+        }
+    }
+
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 1 && indexPath.row == 2 {
+            return 217
+        } else {
+            return super.tableView(tableView, heightForRowAt: indexPath)
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        textField.resignFirstResponder()
+        if indexPath.section == 1 && indexPath.row == 1 {
+            showDatePicker()
+        }
+    }
+
+    override func tableView(_ tableView: UITableView, indentationLevelForRowAt indexPath: IndexPath) -> Int {
+        var newIndexPath = indexPath
+        if indexPath.section == 1 && indexPath.row == 2 {
+            newIndexPath = IndexPath(row: 0, section: indexPath.section)
+        }
+        return super.tableView(tableView, indentationLevelForRowAt: newIndexPath)
     }
 
 }
