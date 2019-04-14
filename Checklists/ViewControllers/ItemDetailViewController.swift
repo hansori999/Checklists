@@ -96,6 +96,16 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
         tableView.insertRows(at: [indexPathDatePicker], with: .fade)
         // Show set-up time
         datePicker.setDate(dueDate, animated: false)
+        dueDateLabel.textColor = dueDateLabel.tintColor
+    }
+
+    func hideDatePicker() {
+        if datePickerVisible {
+            datePickerVisible = false
+            let indexPathDatePicker = IndexPath(row: 2, section: 1)
+            tableView.deleteRows(at: [indexPathDatePicker], with: .fade)
+            dueDateLabel.textColor = UIColor.black
+        }
     }
 
     // MARK:- Table View Delegates
@@ -163,7 +173,11 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         textField.resignFirstResponder()
         if indexPath.section == 1 && indexPath.row == 1 {
-            showDatePicker()
+            if !datePickerVisible {
+                showDatePicker()
+            } else {
+                hideDatePicker()
+            }
         }
     }
 
@@ -173,6 +187,11 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
             newIndexPath = IndexPath(row: 0, section: indexPath.section)
         }
         return super.tableView(tableView, indentationLevelForRowAt: newIndexPath)
+    }
+
+    // MARK:- Text Field Delegates
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        hideDatePicker()
     }
 
 }
