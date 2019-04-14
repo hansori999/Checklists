@@ -22,8 +22,13 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
     
     @IBOutlet weak var doneBarButton: UIBarButtonItem!
     
+    @IBOutlet weak var shouldRemindSwitch: UISwitch!
+    @IBOutlet weak var dueDateLabel: UILabel!
+
+    
     weak var delegate: ItemDetailViewControllerDelegate?
     var itemToEdit: ChecklistItem?
+    var dueDate = Date()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +37,10 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
             title = "Edit Item"
             textField.text = itemToEdit.text
             doneBarButton.isEnabled = true
+            shouldRemindSwitch.isOn = itemToEdit.shouldRemind
+            dueDate = itemToEdit.dueDate
         }
+        updateDueDateLabel()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -53,10 +61,17 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
         if let itemToEdit = itemToEdit {
             itemToEdit.text = textField.text!
             delegate?.itemDetailViewController(self, didFinishEditing: itemToEdit)
+            
+            itemToEdit.shouldRemind = shouldRemindSwitch.isOn
+            itemToEdit.dueDate = dueDate
 
         } else {
             let item = ChecklistItem()
             item.text = textField.text!
+            item.checked = false
+            
+            item.shouldRemind = shouldRemindSwitch.isOn
+            item.dueDate = dueDate
             
             delegate?.itemDetailViewController(self, didFinishAdding: item)
             
@@ -87,6 +102,14 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
         doneBarButton.isEnabled = false
         return true
+    }
+
+    // MARK:- Helper Methods
+    func updateDueDateLabel() {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .short
+        dueDateLabel.text = formatter.string(from: dueDate)
     }
 
 }
